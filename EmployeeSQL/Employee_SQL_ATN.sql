@@ -22,7 +22,6 @@ from employees
 alter table employees add constraint fk_emp_title_id foreign key
 alter table employees ADD Primary KEY (emp_no) REFERENCES department_manager (dept_no)
 
-
 CREATE TABLE departments_csv (
  dept_no character varying(45) NOT NULL,
  dept_name character varying(45) NOT NULL,
@@ -41,18 +40,29 @@ CREATE TABLE department_manager (
 select * 
 from department_manager
 
-
- CREATE TABLE title (
+CREATE TABLE title (
   title_id character varying(45) NOT NULL,
   title character varying(45) not null,
   add primary key (title_id)
  );
   
 select * 
-from department_manager
- 
+from title
 
+CREATE TABLE salaries (
+  emp_no character varying(45) NOT NULL,
+  salary character varying(45) not null,
+  add primary key (title_id)
+ );
+  
+select * 
+from salaries
 
+alter table salaries add constraint fk_emp_no foreign key
+alter table salaries ADD Primary KEY (salaries)
+
+select * 
+from salaries
 
 
 
