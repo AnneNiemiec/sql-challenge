@@ -10,22 +10,26 @@
 CREATE TABLE employees (
   emp_no character varying(45) NOT NULL,
   emp_title_id character varying(45) NOT NULL,
-  birth_date date
+  birth_date character varying(45) NOT NULL,
   first_name character varying(45) NOT NULL,
   last_name character varying(45) NOT NULL,
+  sex character varying(45) NOT NULL,
   hire_date date
   );
  
 select * 
 from employees
 
-alter table employees add constraint fk_emp_title_id foreign key
-alter table employees ADD Primary KEY (emp_no) REFERENCES department_manager (dept_no)
+alter table employees add constraint fk_emp_title_id foreign key (emp_title_id)
+alter table employees ADD constraint employees_pkey Primary KEY (emp_no) 
+--REFERENCES title (dept_no)
 
 CREATE TABLE departments_csv (
  dept_no character varying(45) NOT NULL,
- dept_name character varying(45) NOT NULL,
- ADD Primary KEY (dept_no) REFERENCES departments_emp (dept_no)
+ dept_name character varying(45),
+ ADD Primary KEY (dept_no) 
+ --add contraint departments_csv_pkey
+ --REFERENCES departments_emp (dept_no)
 );
 
 select * 
@@ -34,11 +38,25 @@ from departments_csv
 CREATE TABLE department_manager (
   emp_no character varying(45) NOT NULL,
   dept_no character varying(45) not null,
-  add primary key (emp_no) references employees(emp_no)
+  add primary key (dept_no, emp_no) 
+  --references employees(emp_no)
+  add constraint fk_emp_no foreign key (emp_no)
  );
   
 select * 
 from department_manager
+---------------------
+CREATE TABLE dept_emp (
+  dept_no character varying(45) NOT NULL,
+  emp_no character varying(45) not null,
+ );
+  
+select * 
+from dept_emp
+
+alter table dept_no add constraint fk_dept_no foreign key
+alter table emp_no add constraint fk_emp_no foreign key
+
 
 CREATE TABLE title (
   title_id character varying(45) NOT NULL,
