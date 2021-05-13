@@ -1,37 +1,60 @@
 --Data Modeling
 --Inspect the CSVs and sketch out an ERD of the tables
-CREATE TABLE salaries (
-  emp_no character varying(45) NOT NULL,
-  salary character varying(45))
-
-  Alter table department_manager
-    ADD PRIMARY KEY (dept_no);
-  Alter table dept_emp
-    add Constraint fk_emp_no foreign key(emp_no) references employees (emp_no);
-    ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
-   
-ALTER TABLE department_manager
-DROP CONSTRAINT emp_no;
-
-select * 
-from salaries
-
---Data Engineering
 --Create a table schema for each of the six CSV files (specify data types, primary keys, foreign keys, and other constraints).
 --For the primary keys check to see if the column is unique, otherwise create a composite key. Which takes to primary keys in order to uniquely identify a row.
 --Create tables in the correct order to handle foreign keys.
-
-
-
 --Import each CSV file into the corresponding SQL table. Import data in the same order that the tables were created and account for the headers when importing to avoid errors.
 
+--DROP TABLE IF EXISTS actor;
 
---Data Analysis
---List the following details of each employee: employee number, last name, first name, sex, and salary.
---List first name, last name, and hire date for employees who were hired in 1986.
---List the manager of each department with the following information: department number, department name, the manager's employee number, last name, first name.
---List the department of each employee with the following information: employee number, last name, first name, and department name.
---List first name, last name, and sex for employees whose first name is "Hercules" and last names begin with "B."
---List all employees in the Sales department, including their employee number, last name, first name, and department name.
---List all employees in the Sales and Development departments, including their employee number, last name, first name, and department name.
---In descending order, list the frequency count of employee last names, i.e., how many employees share each last name.
+CREATE TABLE employees (
+  emp_no character varying(45) NOT NULL,
+  emp_title_id character varying(45) NOT NULL,
+  birth_date date
+  first_name character varying(45) NOT NULL,
+  last_name character varying(45) NOT NULL,
+  hire_date date
+  );
+ 
+select * 
+from employees
+
+alter table employees add constraint fk_emp_title_id foreign key
+alter table employees ADD Primary KEY (emp_no) REFERENCES department_manager (dept_no)
+
+
+CREATE TABLE departments_csv (
+ dept_no character varying(45) NOT NULL,
+ dept_name character varying(45) NOT NULL,
+ ADD Primary KEY (dept_no) REFERENCES departments_emp (dept_no)
+);
+
+select * 
+from departments_csv
+
+CREATE TABLE department_manager (
+  emp_no character varying(45) NOT NULL,
+  dept_no character varying(45) not null,
+  add primary key (emp_no) references employees(emp_no)
+ );
+  
+select * 
+from department_manager
+
+
+ CREATE TABLE title (
+  title_id character varying(45) NOT NULL,
+  title character varying(45) not null,
+  add primary key (title_id)
+ );
+  
+select * 
+from department_manager
+ 
+
+
+
+
+
+
+
