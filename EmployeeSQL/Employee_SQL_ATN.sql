@@ -20,20 +20,21 @@ CREATE TABLE employees (
 select * 
 from employees
 
-alter table employees add constraint fk_emp_title_id foreign key (emp_title_id)
+alter table employees add constraint fk_emp_title_id foreign key (emp_title_id) REFERENCES title (title_id)
 alter table employees ADD constraint employees_pkey Primary KEY (emp_no) 
---REFERENCES title (dept_no)
+
 
 CREATE TABLE departments_csv (
  dept_no character varying(45) NOT NULL,
  dept_name character varying(45),
- ADD Primary KEY (dept_no) 
- --add contraint departments_csv_pkey
- --REFERENCES departments_emp (dept_no)
+ 
 );
 
 select * 
 from departments_csv
+
+alter table departments_csv ADD constraint departments_csv_pkey Primary KEY (dept_no) 
+
 
 CREATE TABLE department_manager (
   emp_no character varying(45) NOT NULL,
